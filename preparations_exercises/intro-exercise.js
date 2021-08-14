@@ -102,5 +102,46 @@ https://launchschool.com/books/javascript/read/variables#variablesandvariablenam
 
 Variables and Names
 
+Variable names are often referred to by the broader term, identifiers. In JavaScript, identifiers refer to several things:
+
+- Variable names declared by let and var
+- Constant names declared by const
+- Property names of objects
+- Function names
+- Function parameters
+- Class names
+
+
+> let a = 4
+= undefined
+
+> let b = a
+= undefined
+
+> a = 7
+= 7
+
+> b
+= 4 // The reason b is assigned to its own memory space, a is also assigned to it's own memory space. b then gets reference to the value of a, in this case a is 4. So b will look to a only for an answer. Later a gets the value of seven assigned. B now has the value of a in memory, that was assigned in the first instance. a has a new value, but can't see that value as it is not updated to "know" it. a doesn't tell b it has a new value. b keeps its value it has in memory which is 4.
+
+For b to know the value of a, you need to reassign it to a again. a = b then b will be 7 as well
+
+https://launchschool.com/books/javascript/read/variables#declaringconstants
+Declaring Constants
+
+Constants have an immutable binding to their values. Unlike an ordinary variable, once you declare a constant, you cannot assign it a new value. The constant will continue to have that value until the constant is no longer needed.
+
+
+https://launchschool.com/books/javascript/read/variables#variablescope
+Variable scope
+
+In general, blocks appear in if...else if...else, while, do...while, for, switch, and try...catch statements, or by themselves (as in the first example above).
+
+1 Write a program named greeter.js that greets 'Victor' three times. Your program should use a variable and not hard code the string value 'Victor' in each greeting. Here's an example run of the program:
+
+node greeter.js
+Good Morning, Victor.
+Good Afternoon, Victor.
+Good Evening, Victor.
 
 */
