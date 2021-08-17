@@ -152,4 +152,54 @@ In 20 years, you will be 40 years old.
 In 30 years, you will be 50 years old.
 In 40 years, you will be 60 years old.
 
+3 What happens when you run the following program? Why do we get that result?
+
+{
+  let foo = 'bar';
+}
+
+console.log(foo);
+
+// Console log will print Undefined, as the variable has local scope using the let keyword, but if you use the var keyword it will have global scope and will print 'bar' to the console 
+
+
+4 What happens when you run the following code? Why?
+
+const NAME = 'Victor';
+console.log('Good Morning, ' + NAME);
+console.log('Good Afternoon, ' + NAME);
+console.log('Good Evening, ' + NAME);
+
+NAME = 'Joe';
+console.log('Good Morning, ' + NAME);
+console.log('Good Afternoon, ' + NAME);
+console.log('Good Evening, ' + NAME);
+
+// The code will print: Uncaught TypeError: invalid assignment to const 'NAME'. The keyword const or constant has been declared with variable NAME. const or constants can't be re-assigned, as is being tried with NAME = 'Joe'. To re-assign a variable you must change it the let variable, ex: let name = 'Joe'; console.log('Good Morning, ' + name); name = 'Joe';
+console.log('Good Morning, ' + name);
+
+
+5 Take a look at this code snippet:
+
+let foo = 'bar';
+{
+  let foo = 'qux';
+}
+
+console.log(foo);
+
+// let foo = 'bar' has been declared wich can be re-assigned, but it's not being re-assigned outside the block scope at all. The { let foo = 'bar'; } inside the block isn't accessible. 
+
+6 Will this program produce an error when run? Why or why not?
+
+
+const FOO = 'bar';
+{
+  const FOO = 'qux';
+}
+
+console.log(FOO);
+
+// const FOO = 'bar' is decalred out side the block scope, and because it is a constant you would have assumed a, Uncaught SyntaxError: redeclaration of const FOO or some other error. Because of the code block that is not the case and the 'bar' will be printed in the console. 
+
 */
