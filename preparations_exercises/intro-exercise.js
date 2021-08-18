@@ -211,6 +211,32 @@ $ node greeter.js
 What is your name? Sue
 Hello, Sue!
 
+let name = 'Sue';
+console.log(`Good morning, ${name}!`);
+
+
+
+2 Modify the greeter.js program to ask for the user's first and last names separately, then greet the user with their full name.
+
+$ node greeter.js
+What is your first name? Sue
+What is your last name? Roberts
+Hello, Sue Roberts!
+
+let rlSync1 = require('readline-sync');
+let name1 = rlSync.question("What's your first name?\n");
+let surname1 = rlSync.question("What's your last name?\n");
+console.log(`Good Morning, ${name} ${surname}!`);
+
+
+3 Modify the age.js program you wrote in the exercises for the Variables chapter. The updated code should ask the user to enter their age instead of hard-coding the age in the program. Here's an example run:
+
+How old are you? 22
+You are 22 years old.
+In 10 years, you will be 32 years old.
+In 20 years, you will be 42 years old.
+In 30 years, you will be 52 years old.
+In 40 years, you will be 62 years old.
 
 
 
