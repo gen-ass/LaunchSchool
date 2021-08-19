@@ -239,6 +239,247 @@ In 30 years, you will be 52 years old.
 In 40 years, you will be 62 years old.
 
 
+// https://launchschool.com/books/javascript/read/functions#usingfunctions
+Functions
+
+Before you can use a function, you must first define it with the reserved keyword, function. After the word function, you write the function's name followed by a pair of parentheses (()). After the closing parenthesis, the code you want to associate with the function -- the function body -- gets placed between curly braces ({}).
+
+
+function=function definition say=function name(words=parameter defined) function body={
+  console.log=method(words=parameter printed);
+}
+
+say=call the function("hello"=pass the value to the function);
+say("hi");
+say("how are you");
+say("I'm fine");
+
+At first glance, this program seems silly. It doesn't reduce the amount of code, and in fact, it adds more; quite a bit more. Also, the say function doesn't provide any functionality that console.log doesn't. However, there is a benefit here. We've extracted the logic to display text in a way that makes our program more flexible. If we later need to change how we show some text, we can make the change in one place: the say function. We don't have to change any other code to get the updated behavior. We'll see such an update in a few minutes.
+
+Functions are called by typing their name and providing some optional values that we call arguments. In say.js, the function definition includes (words) after the function name. This syntax tells us that we should supply (pass) a single argument to the function when we call it. Arguments let you pass data from outside the function's scope into the function so it can access the data. If the function definition doesn't need access to outside data, you don't need any arguments.
+
+In the definition of a function, the names between parentheses are called parameters. The arguments are the values of those parameters.
+
+Function names and parameters are both considered variable names in JavaScript. Parameters, in particular, are local variables; they are only defined locally, within the body of the function.
+
+
+Programmers often talk about function invocation and invoking functions. The terms are synonymous with "call" and "calling." You invoke a function or write a function invocation. We use these terms as well.
+
+
+Programmers often talk about function invocation and invoking functions. The terms are synonymous with "call" and "calling." You invoke a function or write a function invocation. We use these terms as well.
+
+The local variable names between parenthesis (()) are properly called parameters, not arguments. Arguments are the values you pass into the function for each of those parameters. The parameter values inside the function are also called arguments. You can think of parameters as placeholders, while arguments refer to the values that get stored in the placeholders.
+
+function add(left, right) { // left & right are parameters here
+  let sum = left + right;   // left & right are arguments here
+  return sum;
+}
+
+let sum = add(3, 6); // 3 and 6 are arguments
+
+
+// https://launchschool.com/books/javascript/read/functions#returnvalues
+Retun values
+
+undefined; this is the implicit return value of most JavaScript functions.
+However, when you use a return statement, you can return a specific value from a function. This is an explicit return value. 
+
+
+function add(a, b) {
+  return a + b;
+}
+
+add(2, 3); // returns 5
+
+
+Functions that always return a boolean value, i.e., true or false, are called predicates. You will almost certainly encounter this term in future readings and videos, so commit it to memory.
+
+// https://launchschool.com/books/javascript/read/functions#defaultparametrs
+Default Parameters
+
+function say(words = "hello") {
+  console.log(words + "!");
+}
+
+say("Howdy"); // => Howdy!
+say();        // => hello!
+
+If nothing is passed to the parameter 'words' then the default value printed will be 'hello', as this is the default if no argument is evaluated it returns the the default parameter
+
+// https://launchschool.com/books/javascript/read/functions#nestedfunctions
+Nested Functions
+
+
+function foo() {
+  function bar() {
+    console.log("BAR");
+  }
+
+  bar(); // => BAR
+  bar(); // => BAR
+}
+
+foo();
+bar(); // ReferenceError: bar is not defined
+
+nested funtion can't be called from outside of the nested function itself, this creates a private function. Performance is negligible here.
+
+// https://launchschool.com/books/javascript/read/functions#functionsscope
+Functions & Scope
+
+Two main variables: global and local, declare by let and const
+
+
+global
+
+let greetingMessage = "Good Morning!";
+console.log(greetingMessage);
+
+// This will print a global variable and is accessible to the whole program.
+
+
+let greetingMessage = "Good Morning!";
+
+function greetPeople() {
+  console.log(greetingMessage);
+}
+
+greetPeople();
+
+// the function declaration can call from inside the function body or code block, the global variable as it's assigned outside of any code block or function
+
+
+function greetPeople() {
+  console.log(greetingMessage);
+}
+
+function changeGreetingMessage(newMessage) {
+  greetingMessage = newMessage;
+}
+
+changeGreetingMessage("Good Evening");
+greetPeople(); // => 'Good Evening'
+
+// We've added a changeGreetingMessage function to our program that reassigns greetingMessage to a new string supplied as an argument. Line 11 invokes the function, passing in the 'Good Evening' string, which becomes the new value for the global greetingMessage.
+
+local
+
+function greetPeople() {
+  let greetingMessage = "Good Morning!";
+  console.log(greetingMessage);
+}
+
+greetPeople();
+console.log(greetingMessage); // raises ReferenceError: Uncaught ReferenceError: greetingMessage is not defined
+
+// value can only be used within, not elsewhere
+
+// Local variables have a short life span, as sson as the function completes the scope goes away. This allows the program to add new variables to the local variable. The scope is then restarted and the new variable is passed to the parameter within function. This parameter overwrites the and current parameter in memory. This happens to allow memory to be re-used otjerwise it will lock the memory, making the block unusable. The program crashes. 
+
+
+// https://launchschool.com/books/javascript/read/functions#functionsvsmethods
+Functions vs Methods
+
+Thus far, all our function calls used functionName(obj) syntax. We call a function by writing parentheses after its name and passing it zero or more arguments. If you want to convert a string to all uppercase letters, you might expect to use a function call like toUpperCase(string). However, you need to use a different syntax called method invocation.
+
+Method invocation occurs when you prepend a variable name or value followed by a period (.) to a function invocation, e.g. 'xyzzy'.toUpperCase().
+
+
+Parameters are fields that serve as variable names inside of a function. 
+
+Arguments are the values passed to the function when it is called. 
+
+// https://launchschool.com/books/javascript/read/functions#mutatingthecaller
+Mutate the caller
+Sometimes a method permanently alters the object that invokes the method: it mutates the caller. To contrast this with non-mutating methods, let's see an example:
+
+let name = "Pete Hanson";
+console.log(name.toUpperCase()); // => 'PETE HANSON'
+console.log(name);               // => 'Pete Hanson'
+
+
+// toUpperCase() as a string method, mutates the string in a non-destructive manner. It has no effect on the caller: name. It leaves it as is.
+
+
+let oddNumbers = [1, 3, 5, 7, 9];
+oddNumbers.pop();
+console.log(oddNumbers); // => [1, 3, 5, 7]
+
+// The pop() method will permanently alter the array above. It mutates the object, which is the object: array.
+
+
+function changeFirstElement(array) {
+  array[0] = 9;
+}
+
+let oneToFive = [1, 2, 3, 4, 5];
+changeFirstElement(oneToFive);
+console.log(oneToFive); // => [9, 2, 3, 4, 5]
+
+// Here the argument is mutataed using the index syntax. It will alter the array when the subtax runs.
+
+
+function addToArray(array) {
+  return array.concat(10);
+}
+
+let oneToFive = [1, 2, 3, 4, 5];
+console.log(addToArray(oneToFive)); // => [1, 2, 3, 4, 5, 10]
+console.log(oneToFive);             // => [1, 2, 3, 4, 5]
+
+One non-obvious point here is that mutation is a concern when dealing with arrays and objects, but not with primitive values like numbers, strings, and booleans. Primitive values are immutable. That means their values never change: operations on immutable values always return new values. Operations on mutable values (arrays and objects) may or may not return a new value and may or may not mutate data.
+
+If you have experience programming in other languages and wonder whether JavaScript is a pass-by-value or pass-by-reference language, JavaScript is both! It uses pass-by-value when dealing with primitive values and pass-by-reference with objects and arrays.
+
+
+// https://launchschool.com/books/javascript/read/functions#functioncomposition
+Function Composition
+
+function add(a, b) {
+  return a + b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+let sum = add(20, 45);
+console.log(sum); // => 65
+
+let difference = subtract(80, 10);
+console.log(difference); // => 70
+
+This works fine. However, in a process called function composition, JavaScript lets us use a function call as an argument to another function. Stated differently, we're saying that we can pass add(20, 45) and subtract(80, 10) as arguments to another function:
+
+
+// https://launchschool.com/books/javascript/read/functions#threewaystodefineafunction
+Three Ways to Define a Function
+
+
+this is a function: function declaration.
+function functionName(zeroOrMoreArguments...) {
+  // function body
+}
+
+// Function declarations will be hoisted to the top of the code block being run, because of this it can be invoked before it is declared .
+
+
+Let's see another way to define a function called a function expression.
+
+let greetPeople = () => {
+  console.log("Good Morning!");
+};
+
+greetPeople();
+
+// Function expressions cannot be hoisted/invoked before it is declared
+
+We can do that since JavaScript functions are first-class functions. The key feature of first-class functions is that you can treat them like any other value. In fact, all JavaScript functions are objects. 
+
+
+
+
+
 
 
 
