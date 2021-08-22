@@ -474,7 +474,79 @@ greetPeople();
 
 // Function expressions cannot be hoisted/invoked before it is declared
 
-We can do that since JavaScript functions are first-class functions. The key feature of first-class functions is that you can treat them like any other value. In fact, all JavaScript functions are objects. 
+We can do that since JavaScript functions are first-class functions. The key feature of first-class functions is that you can treat them like any other value. In fact, all JavaScript functions are objects. So technically, all objects in JavaScript are accessed on the same level or seen having the same importance when using it in the program.
+
+These objects be used as follows:
+- assign them to variables, 
+- pass them as arguments to other functions, 
+- and return them from a function call.
+
+With arrow functions you can, leave the return statement. We can omit it in arrow functions when and only when the function body contains a single expression (the expression may have subexpressions, but the entire expression must evaluate to a single value). Suppose it contains two or more expressions or statements. In that case, you must explicitly return a value if you need it, and you must also use curly braces:
+
+let add = (a, b) => a + b;
+let getNumber = (text) => {
+  let input = prompt(text);
+  return Number(input);
+};
+
+let number1 = getNumber("Enter a number: ");
+let number2 = getNumber("Enter another number: ");
+console.log(add(number1, number2));
+
+On line #2, we define an arrow function that requires one parameter. The parentheses around the parameter name are optional in this case and are often omitted.
+
+// https://launchschool.com/books/javascript/read/functions#callstack
+Call stack
+
+https://pythontutor.com/visualize.html#mode=display to visualise the call stack
+https://www.youtube.com/watch?v=W8AeMrVtFLY video explains call stack
+
+function first() {
+  console.log("first function");
+}
+
+function second() {
+  first();
+  console.log("second function");
+}
+
+second();
+
+
+1 What does this code log to the console? Does executing the foo function affect the output? Why or why not?
+
+let bar = 1;
+function foo() {
+  let bar = 2;  // remove the let keyword now it assigns bar = 2; to be avaiable outside the function
+}
+
+foo();
+console.log(bar);
+
+// It has no effect on the outcome of bar. bar is declared with let inside the function foo() the {} braces indicates, a local scope is created. Bar remains 1, as the local scope contains bar from being declared the value of 2.
+
+To get bar to become the value of 2, we need to change the local scope inside the foo() fucntion. By removing let and assigning bar = 2; we make the value globally available. Now the line will print, 2
+
+2 In the exercises for the previous chapter, you wrote a dynamic greeter program named greeter.js. Add a function to this program that solicits the user's first and last names in separate invocations; the function should return the appropriate name as a string. Use the return values to greet the user with their fullname:
+
+function getName(prompt) {
+  let readlineSync = require('readline-sync');
+  let name = readlineSync.question(prompt);
+  return name;
+}
+
+let firstName = getName('What is your first name? ');
+let lastName = getName('What is your last name? ');
+console.log(`Hello, ${firstName} ${lastName}!`);
+
+
+3 Write a program that uses a multiply function to multiply two numbers and returns the result. Ask the user to enter the two numbers, then output the numbers and result as a simple equation
+
+
+
+
+
+
 
 
 
