@@ -838,5 +838,29 @@ function isArrayEmpty(arr) {
 
 isArrayEmpty([]);
 
+The array is not empty. the length of the array is calculated and returns 0. This is a value in the empty array.
+
+7 Write a function that takes a string as an argument and returns an all-caps version of the string when the string is longer than 10 characters. Otherwise, it should return the original string. Example: change 'hello world' to 'HELLO WORLD', but don't change 'goodbye'.
+
+function capital(stringInput) {
+	if (stringInput.length > 10 && stringInput === 'string') {
+		return stringInput.toUpperCase();
+	} else {
+		stringInput = stringInput;
+	}
+  return stringInput;
+}
+
+function getString(prompt) {
+  let readlineSync = require('readline-sync');
+  return (readlineSync.question(prompt.toString()));
+}
+
+let stringInput = getString('Enter any value: ');
+console.log(`Is the string ${stringInput} capitalised ${stringInput.length > 10 ? '--YES--' : '--NO--'} ${capital(stringInput)} - Characters counted: ${stringInput.length}`);
+
+
+
+
 
 */
