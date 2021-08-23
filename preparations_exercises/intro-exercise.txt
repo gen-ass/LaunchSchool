@@ -543,16 +543,300 @@ console.log(`Hello, ${firstName} ${lastName}!`);
 3 Write a program that uses a multiply function to multiply two numbers and returns the result. Ask the user to enter the two numbers, then output the numbers and result as a simple equation
 
 
+$ node multiply.js
+Enter the first number: 3.141592653589793
+Enter the second number: 2.718281828459045
+3.141592653589793 * 2.718281828459045 = 8.539734222673566
+
+
+4 What does the following code log to the console?
+
+function scream(words) {
+  words = words + '!!!!';
+  return;
+  console.log(words);
+}
+
+scream('Yipeee');
+
+// When a return statement is used in a function body, the execution of the function is stopped. If specified, a given value is returned to the function caller. This implies the return; statement will not run console.log words. It will directly return any value to the function caller scream(). The value is still available in memory, but it's not printed for humans to see.
+
+
+5 What does the following code log to the console?
+
+function scream(words) {
+  return words + '!!!!';
+}
+
+scream('Yipeee');
+
+// Nothing as return has done the execution of the code. 
+
+
+// https://launchschool.com/books/javascript/read/flow_control
+Flow control
+
+Conditionals
+A conditional is a fork (or multiple forks) in the road. Your data arrives at a conditional, which then tells the data where to go. The simplest conditionals use a combination of if statements with comparison and logical operators (<, >, <=, >=, ==, ===, !=, !==, &&, ||) to direct traffic. They use the keywords if and else.
+
+
+
+if (x === 3) {                          // Example 1
+  console.log("x is 3");
+}
+
+if (x === 3) {                          // Example 2
+  console.log("x is 3");
+} else {
+  console.log("x is NOT 3");
+}
+
+if (x === 3) console.log("x is 3");     // Example 3
+
+if (x === 3)                            // Example 4
+  console.log("x is 3");
+
+if (x === 3)                            // Example 5
+  console.log("x is 3");
+else
+  console.log("x is NOT 3");
+
+if (x === 3) {                          // Example 6
+  console.log('x is 3');
+} else {
+  if (x === 4) {
+    console.log('x is 4');
+  } else {
+    console.log('x is NOT 3 or 4');
+  }
+}
+
+if (x === 3) {                          // Example 7
+  console.log("x is 3");
+} else if (x === 4) {
+  console.log("x is 4");
+} else {
+  console.log('x is NOT 3 or 4');
+}
 
 
 
 
+// https://launchschool.com/books/javascript/read/flow_control#comparisons
+Comparison
 
 
+===
+The strict equality operator, also known as the identity operator, returns true when the operands have the same type and value, false otherwise. We discussed === in The Basics chapter. It should be familiar even if it still looks strange.
 
 
+!==
+The strict inequality operator returns false when the operands have the same type and value, true otherwise. Note that !== is the inverse of ===: when === returns true, !== returns false, and vice versa.
 
 
+== - These creates coercion
+The non-strict equality operator, also known as the loose equality operator, is similar to ===. However, when the operands have different types, == attempts to coerce one of the operands to the other operand's type before it compares them, and it may coerce both operands in some cases. The result is true when the final values are the same, false otherwise. The coercion behavior can lead to unexpected results. For instance, when we compare the number 5 to the string '5' using ==, we get true; with ===, we get false.
+
+!= - These creates coercion
+The non-strict inequality operator, also known as the loose inequality operator, is similar to !==. However, when the operands have different types, != attempts to coerce one of the operands to the other operand's type before it compares them, and it may coerce both operands in some cases. The result is false when the final values are the same, true otherwise.
+
+
+The rules that govern which operand == and != coerces to the other are complex and difficult to remember. Avoid these operators when you can. For instance, you can use explicit coercion and === in most cases.
+
+That advice is not universal. There are JavaScript developers, including some well-known ones, who will tell you to go ahead and use the loose operators, == and !=. Their reasoning is easy to understand: your code should not be attempting to compare different kinds of things, except in a few well-defined, isolated cases. Using the strict operators as a workaround is just masking bad code. They're not completely wrong! If you're comparing strings with arrays, your code almost certainly needs a redesign.
+
+That said, there are some edge cases that you need to be aware of with the loose operators. For that reason, the style we use at Launch School insists that you always use the strict operators. Doing so won't prevent you from having to fix bad code, but at this stage of your journey, it's less confusing to use the strict operators, and easier to debug.
+
+
+<
+The less than operator returns true when the value of the left operand has a value that is less than the value of the right operand, false otherwise.
+
+When comparing strings, the comparison is character-by-character. JavaScript moves from left-to-right in the strings looking for the first character that is different from its counterpart in the other string. Once it finds a character that differs, it compares that character with its counterpart, and makes a decision based on that.
+
+>
+The greater than operator returns true when the value of the left operand has a value that is greater than the value of the right operand, false otherwise.
+
+<=
+The less than or equal to operator returns true when the value of the left operand has a value that is less than or equal to the value of the right operand, false otherwise. Note that =< is not a valid comparison operator.
+
+>=
+The greater than or equal to operator returns true when the value of the left operand has a value that is greater than or equal to the value of the right operand, false otherwise. Note that => is not a valid comparison operator.
+
+
+https://launchschool.com/books/javascript/read/flow_control#logicaloperators
+Logical Operators
+
+!
+The not operator returns true when its operand is false and returns false when the operand is true. That is, it negates its operand. Note that, unlike most operators, ! takes a single operand; the operand appears to the right of the operator.
+
+&&
+The and operator returns true when both operands are true and false when either operand is false.
+
+||
+The or operator returns true when either operand is true and false when both operands are false.
+
+https://launchschool.com/books/javascript/read/flow_control#shortcircuits
+Short Circuits
+
+https://launchschool.com/books/javascript/read/flow_control#truthiness
+Truthiness
+
+
+Why is that? The answer is simple: when coercing a value to a boolean, JavaScript treats the following values as false:
+
+    false
+    The number 0. This includes all 3 variations of zero in JavaScript:
+        0: The ordinary zero value.
+        -0: A negative zero. That's mathematical nonsense, but a real thing in JavaScript.
+        0n: The BigInt version of zero.
+    An empty string ('')
+    undefined
+    null
+    NaN
+
+
+We often use the term falsy to refer to values that evaluate as false, while the values that evaluate as true are truthy. We use these terms when we need to distinguish between boolean true and false values. We can also discuss truthiness: whether something is a truthy or falsy value.
+
+Truthiness is exceptionally useful in JavaScript; there are plenty of situations where you want to treat the values 0 (all 3 variants), '', undefined, null, and NaN as though they were false. It helps make conditional expressions read more naturally, but it can also catch an unwary programmer by surprise. If you have experience with another language that uses falsy values, be wary; most languages don't share the same idea of what values are falsy. That's a constant headache for programmers that work with multiple languages.
+
+Let's return to the if (x = 5) example. When you see code like that, it's important to remember that x = 5 is an assignment. It returns 5, which, in turn, is a truthy value. You should avoid using assignments in conditionals: at first glance, if (x = 5) and if (x == 5) look identical. However, they have entirely different meanings and produce different results. That makes the code suspect: the assignment might be intentional, but it might also be a mistake, and mistakes are bugs waiting to bite the unwary. Worse yet, another programmer may come along and naively "fix" the code.
+
+let isOk = !!(foo || bar);
+
+In reality, !! isn't a separate operator in JavaScript. Instead, it's two consecutive ! operators. The expression !!a is equivalent to writing !(!a). The inner ! converts the value of a to false if it is truthy, or true if a is falsy. The outer ! then flips true to false or false to true. In the end, we end up with a boolean value instead of a truthiness value:
+
+
+https://launchschool.com/books/javascript/read/flow_control#operatorprecedence
+Operator Precedence
+
+JavaScript has a set of precedence rules it uses to evaluate expressions that use multiple operators and sub-expressions. The following is a list of the comparison operations from the highest precedence (top) to lowest (bottom).
+
+    <=, <, >, >= - Comparison
+    ===, !==, ==, != - Equality
+    && - Logical AND
+    || - Logical OR
+
+if ((x || y) && z) {
+  // do something
+}
+
+In this code, x || y gets evaluated first, and then result && z. That's a different result from the un-parenthesized expression. They help the computer and other programmers understand your intentions, you should strive to use parentheses in any expression that uses two or more different operators.
+
+JavaScript evaluates parentheses in the usual algebraic order. That is, it evaluates the expression in the innermost set of parentheses first, then works its way out to the outermost part of the expression. When multiple parenthesized subexpressions appear at the same depth, it evaluates them from left to right. Once it evaluates the parenthesized expressions, it evaluates the final expression value.
+
+hort-circuit evaluation may prevent JavaScript from evaluating the expression to the right of the operator, but the precedence rules remain the same.
+
+
+https://launchschool.com/books/javascript/read/flow_control#theternaryoperator
+The Ternary Operator
+
+
+The ternary operator is a quick and easy way to write a short, concise, and simple if/else conditional. It uses a combination of the ? and : symbols and takes 3 operands (hence, the name "ternary"):
+
+> 1 == 1 ? 'this is true' : 'this is not true'
+= 'this is true'
+
+> 1 == 0 ? "this is true" : "this is not true"
+= 'this is not true'
+ 
+ How does this work? JavaScript first evaluates the first operand (the comparisons). If it has a truthy result, JavaScript evaluates the second operand (this is true) and returns its value. Otherwise, it evaluates the third operand (this is not true) and returns its value.
+
+The chief advantage that the ternary operator has over an if/else statement is that the entire structure is an expression. What that means is that we can treat the ternary expression as a value: we can assign it to a variable, pass it as an argument, and so on. Since if/else is a statement, we can't capture its result to a variable.
+
+more ternary examples
+var age = 20;
+var beverage = (age >= 21) ? "Beer" : "Juice";
+console.log(beverage); // "Beer"
+
+Handling null values
+
+One common usage is to handle a value that may be null:
+
+let greeting = person => {
+    let name = person ? person.name : `stranger`
+    return `Howdy, ${name}`
+}
+
+console.log(greeting({name: `Alice`}));  // "Howdy, Alice"
+console.log(greeting(null));             // "Howdy, stranger"
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
+Conditional chains
+
+The ternary operator is right-associative, which means it can be "chained" in the following way, similar to an if … else if … else if … else chain
+
+
+https://launchschool.com/books/javascript/read/flow_control#switchstatement
+switch statement
+
+The last conditional flow structure we want to discuss is the switch statement. A switch statement is similar to an if statement, but it has a different interface. It compares a single value against multiple values for strict equality (as with the === operator), whereas if can test multiple expressions with any condition.
+
+1 What values do the following expressions evaluate to?
+
+false || (true && false); // false
+true || (1 + 2); // true first operand is true, so it returns true
+(1 + 2) || true; // 3  first operand is 3 and is then returned. However, the || operator actually returns the value of one of the specified operands, so if this operator is used with non-Boolean values, it will return a non-Boolean value.   The or operator returns true when either operand is true and false when both operands are false.
+true && (1 + 2); // 3  However, the && operator actually returns the value of one of the specified operands, so if this operator is used with non-Boolean values, it will return a non-Boolean value.     The and operator returns true when both operands are true and false when either operand is false.
+false && (1 + 2); // false The first operation is FALSE. The and operator returns true when both operands are true and false when either operand is false.
+(1 + 2) && true; // true use and logical operator, but starts with parentheses calculates number, both operands is true, 
+(32 * 4) >= 129; // false compares two numbers, but starts with parentheses then compares
+false !== !true; // false strict not operator and not operation turns boolean values to the opposite values
+true === 4; // false boolean strictly compared with number 
+false === (847 === '847'); // true strict operator
+false === (847 == '847'); // false coercion
+(!true || (!(100 / 5) === 20) || ((328 / 4) === 82)) || false;
+
+2 Write a function, evenOrOdd, that determines whether its argument is an even number. If it is, the function should log 'even' to the console; otherwise, it should log 'odd'. For now, assume that the argument is always an integer.
+
+3 Let's improve our previous implementation of evenOrOdd. Add a validation check to ensure that the argument is an integer. If it isn't, the function should issue an error message and return.
+
+4 What does the following code log to the console, and why?
+
+function barCodeScanner(serial) {
+  switch (serial) {
+    case '123':
+      console.log('Product1');
+    case '113':
+      console.log('Product2');
+    case '142':
+      console.log('Product3');
+    default:
+      console.log('Product not found!');
+  }
+}
+
+barCodeScanner('113');
+
+Product2
+Product3
+Product not found!
+
+
+It prints all the cases and the default case and stops. No break keyword is included. This creates a fall-through. It does not care that input 113 match Product2. Nothing tells the program to stop.
+
+
+5 Refactor this statement to use an if statement instead.
+
+return foo() ? 'bar' : qux();
+
+if (foo()) {
+  return 'bar';
+} else {
+  return qux();
+}
+
+
+6 What does this code output to the console?
+
+function isArrayEmpty(arr) {
+  if (arr) {
+    console.log('Not Empty');
+  } else {
+    console.log('Empty');
+  }
+}
+
+isArrayEmpty([]);
 
 
 */
