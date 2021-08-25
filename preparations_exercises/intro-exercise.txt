@@ -860,6 +860,37 @@ let stringInput = getString('Enter any value: ');
 console.log(`Is the string ${stringInput} capitalised ${stringInput.length > 10 ? '--YES--' : '--NO--'} ${capital(stringInput)} - Characters counted: ${stringInput.length}`);
 
 
+8 Write a function that logs whether a number is between 0 and 50 (inclusive), between 51 and 100 (inclusive), greater than 100, or less than 0.
+
+
+https://launchschool.com/books/javascript/read/loops_iterating
+Loops and iterating
+
+The increment operator (++) increments its operand by 1; that is, it adds 1 to the existing value. There's a corresponding decrement operator (--) that decrements a variable's value by 1. That is, it subtracts 1 from the value. JavaScript provides these operators since incrementing and decrementing by 1 are such commonplace operations.
+
+There are two forms of ++: one that comes before the variable name (the pre-increment operator), and one that comes after (the post-increment operator). Both increment the variable, but they differ in what gets returned by the expression. The pre-increment form returns the new value of the variable, while the post-increment form returns the previous value of the variable.
+
+
+
+There's a growing sentiment among some developers that the increment and decrement operators are harmful. It's easy to mistype them in ways that can lead to strange bugs, especially if you're not mindful of the return values. They recommend using the += and -= operators instead; it's only a few characters more to type.
+
+Most developers still use them in the increment clause of a for loop:
+
+for (var index = 0; index < 5; ++index) {
+  // body of loop
+}
+
+However, they shouldn't be used anywhere else.
+
+
+Looping Over Arrays With while
+
+do/while Loop
+
+A do/while loop differs visibly from a while loop, but its behavior is almost identical. The crucial difference is that do/while always executes the code in the block at least once. A while loop can't make that guarantee since the initial condition may be falsy; if it is, the loop body doesn't run. In a do/while loop, the conditional check occurs at the end of the loop instead of the beginning which allows it to run the code at least once, even if the condition is falsy when the loop begins.
+
+
+
 
 
 
