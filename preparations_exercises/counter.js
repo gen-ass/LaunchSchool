@@ -54,3 +54,33 @@ do {
   password = rlSync.question("Password? ");
 } while (password === '');
 
+
+let names1 = ['Chris', 'Kevin', 'Naveed', 'Pete', 'Victor'];
+let upperNames1 = [];
+
+for (let index = 0; index < names1.length; index += 1) {
+  if (names1[index] === 'Naveed') {
+    continue;
+  }
+
+  let upperCaseName = names1[index].toUpperCase();
+  upperNames1.push(upperCaseName);
+}
+
+console.log(upperNames1); // => ['CHRIS', 'KEVIN', 'PETE', 'VICTOR']
+
+
+// You can rewrite a loop that uses continue with a negated if conditional.
+
+
+let names2 = ['Chris', 'Kevin', 'Naveed', 'Pete', 'Victor'];
+let upperNames2 = [];
+
+for (let index = 0; index < names2.length; index += 1) {
+  if (names2[index] !== 'Naveed') {
+    let upperCaseName = names[index].toUpperCase();
+    upperNames2.push(upperCaseName);
+  }
+}
+
+console.log(upperNames2); // ['CHRIS', 'KEVIN', 'PETE', 'VICTOR']
