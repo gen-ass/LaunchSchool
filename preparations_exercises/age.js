@@ -8,15 +8,15 @@ let ageIncrement = -10; // This is the age incrementor starting at -10. When the
 
 // using the do...while loop
 do {
-		ageIncrement += 10;
-		if (ageIncrement === 0) {  
-				console.log(`You are ${ageCurrent} years old.`);
-		} else {
-			console.log(`In ${ageIncrement} years, you will be ${ageCurrent} years old.`);
-		}
-		ageCurrent += 10;
+	ageIncrement += 10;
+	if (ageIncrement === 0) {
+		console.log(`You are ${ageCurrent} years old.`);
+	} else {
+		console.log(`In ${ageIncrement} years, you will be ${ageCurrent} years old.`);
+	}
+	ageCurrent += 10;
 }
-while (ageCurrent <= 60); 
+while (ageCurrent <= 60);
 
 
 
@@ -26,7 +26,7 @@ age = parseInt(age);
 alert(`You are ${age} years old.`);
 for (let future = 10; future <= 40; future += 10) {
 	alert(`In ${future} years, you will be ${age + future} years old.`);
-	
+
 }
 
 /*You are 20 years old.
