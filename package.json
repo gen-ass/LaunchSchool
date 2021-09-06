@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/gen-ass/LaunchSchool#readme",
   "dependencies": {
+    "jwt-decode": "^3.1.2",
     "readline-sync": "^1.4.10"
   }
 }
