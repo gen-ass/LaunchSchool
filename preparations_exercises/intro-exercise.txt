@@ -1165,6 +1165,154 @@ reduce takes two arguments: a callback function and a value that initializes som
 > arr.reduce((accumulator, element) => accumulator * element, 1)
 = 210
 
+ let strings = ['a', 'b', 'c', 'd']
+strings.reduce((accumulator, element) => { return accumulator + element.toUpperCase() }, '');
+strings.reduce((accumulator, element) => { return accumulator + element.padEnd(2, '.') }, '');
+
+https://launchschool.com/books/javascript/read/arrays#arrayscanbeodd
+Arrays can be odd
+
+let arr = [1, 2, 3]
+typeof arr
+= 'object'
+
+detect the array
+let arr = [1, 2, 3]
+Array.isArray(arr)
+
+If you change an array's length property to a new, smaller value, the array gets truncated; JavaScript removes all elements beyond the new final element.
+
+
+https://launchschool.com/books/javascript/read/arrays#nestedarrays
+Nested arrays
+
+Array elements can contain anything, including other arrays. You can create arrays with arrays inside them and even arrays inside those inner arrays. Suppose you want to track all of the teams playing in a mixed doubles tennis tournament. You might create an array like this.
+
+Array Equality
+
+
+JavaScript treats two arrays as equal only when they are the same array: they must occupy the same spot in memory. This rule holds for JavaScript objects in general; objects must be the same object. For this reason, the second example returns true while the first one returns false. Assigning a to b makes b refer to the same array as a; it doesn't create a new array.
+
+
+https://launchschool.com/books/javascript/read/arrays#otherarraymethods
+Other array methods
+
+The includes method determines whether an array includes a given element:
+
+Internally, includes uses === to compare elements of the array with the argument. That means we can't use includes to check for the existence of a nested array or an object unless we have the same object or array we're looking for:
+
+> let inner = [3, 4];
+> let a = [1, 2, inner, 5]
+
+> a.includes([3, 4])
+= false
+
+> a.includes(inner)
+= true
+
+The sort method is a handy way to rearrange the elements of an array in sequence. It returns a sorted array.
+
+> let a = ["e", "c", "h", "b", "d", "a"]
+> a.sort()
+= [ 'a', 'b', 'c', 'd', 'e', 'h' ]
+
+
+slice
+
+The slice method—not the splice method you met earlier—extracts and returns a portion of the array. It takes two optional arguments. The first is the index at which extraction begins, while the second is where extraction ends:
+
+
+reverse
+
+The reverse method reverses the order of an array.
+
+> let numbers = [1, 2, 3, 4]
+> numbers.reverse()
+= [ 4, 3, 2, 1 ]
+
+> numbers
+= [ 4, 3, 2, 1 ]
+
+
+1 In the following code, what are the final length values for array1, array2, array3, array4, and array5?
+
+let array1 = [1, 2, undefined, 4];
+array1.length
+= 4
+Object.keys(array1)
+= [ '0', '1', '2', '3' ]
+array1
+= [ 1, 2, undefined, 4 ]
+All elements are counted. Undefined as well as an index value.
+
+let array2 = [1];
+array2.length = 5;
+= 1
+Object.keys(array2)
+= [ '0' ]
+array2
+= [ 1, <4 empty items> ]
+The element in the array is expanded past the original size. This created 1 assigned original item, and 4 empty unassigned items.
+
+let array3 = [];
+array3[-1] = [1];
+array3.length
+= [ 0 ]
+Object.keys(array3)
+= [ '-1' ]
+array3
+= [ '-1': [ 1 ] ]
+The element added to the array is a negative value and is counted as a key by Object.keys. But array.length returns 0 elements, all negative values are not counted and non-integer numbers
+
+
+let array4 = [1, 2, 3, 4, 5];
+array4.length = 3;
+array4.length
+= [3]
+Object.keys(array4)
+= [ '0', '1', '2' ]
+array4
+= [ 1, 2, 3 ]
+truncated to shortest length, being 3
+
+
+let array5 = [];
+array5[100] = 3;
+array5.length
+= [101]
+Object.keys(array5)
+= [ '100' ]
+array5
+= [ <100 empty items>, 3 ]
+The highest index value plus 1 is counted: 100 plus 1 = 101
+
+
+2 Log all of the even values from myArray to the console.
+
+let myArray = [1, 3, 6, 11, 4, 2, 4, 9, 17, 16, 0];
+
+
+for (let i = 0; i < myArray.length; i += 1) {
+  let value = myArray[i];
+  if (value % 2 === 0) {
+    console.log(value);
+  }
+}
+
+3 Let's make the problem a little harder. In this problem, we're again interested in even numbers, but this time the numbers are in nested arrays in a single outer arr
+
+let myArray = [ [1, 3, 6, 11], [4, 2, 4], [9, 17, 16, 0] ];
+
+for (let i = 0; i < myArray.length; i += 1) {
+  for (let j = 0; j < myArray[i].length; j += 1) {
+    let value = myArray[i][j];
+    if (value % 2 === 0) {
+      console.log(value);
+    }
+  }
+}
+
+Our approach is again straightforward, but it's a bit verbose. However, the chained brackets in myArray[i][j] make it visually explicit that we're dealing with a two-dimensional nested array.
 
 
 */
