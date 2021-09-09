@@ -11,4 +11,4 @@ function evenOrOdd(number) {
   }
 }
 
-evenOrOdd('o');
+console.log(evenOrOdd(0));
