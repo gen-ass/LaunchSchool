@@ -1,6 +1,6 @@
 let jwt_decode = require('jwt-decode');
 
-var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1MjczIiwicm9sZXMiOlsiUk9MRV9DQU5ESURBVEUiXSwiaWF0IjoxNjMwOTIwMjY3LCJleHAiOjE2MzA5MjM4Njd9.LHNA0qpIlBAxyZJgXtux5fpUQMGcwxssihtJxfv30-0ozljT11Btze2W-XWDt5kFy_mInUqLs3lQbnYbRbsaig";
+var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1Mzg1Iiwicm9sZXMiOlsiUk9MRV9DQU5ESURBVEUiXSwiaWF0IjoxNjMxNjM4MTA1LCJleHAiOjE2MzE2NDE3MDV9.dC6T7hmrVPJQGkSeHZNAvSQUfSN_RGZNuXU5xwP2vnatC_ipD-azlJ-QaybvLzDglcmdj7jodUiC0IyW-sPjtg";
 var decoded = jwt_decode(token);
 
 console.log(decoded);

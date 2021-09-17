@@ -70,3 +70,23 @@ function parseJwt (token) {
 
     return JSON.parse(jsonPayload);
 };
+
+
+Please implement a solution for the following in javascript at jsfiddle.net and paste a link below.
+
+
+    For the range of integers 1 to 100, if the number is a multiple of 2 then output "Man"
+    if the number is a multiple of 5 then output "Plan"
+    If the number is a multiple of both then output "ManPlan"
+    If the number is not a multiple of 2 or 5 then output the number
+    The outputs should be separated by commas and there should be no trailing comma
+
+
+Example outpout:
+
+1,Man,3,Pan,Plan,Man,7,Man,9,ManPlan,11,Man,13,Man,Plan,Man,17,Man,19......
+
+for (let x = 1; x < 101; x++)document.write((((x % 2 ? '' : 'Man') + (x % 5 ? '' : 'Plan')) || x) + ',');
+
+https://jsfiddle.net/z7uy6wce/1/
+https://jsfiddle.net/ywef3v0z/1/

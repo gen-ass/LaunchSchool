@@ -1333,5 +1333,201 @@ let array = [3, 5, 7];
 console.log(sumOfSquares(array)); // => 83
 
 
+8 This problem is more challenging than most in this book. Don't worry if you can't solve it on your own.
+
+Write a function similar to the oddLengths function from Exercise 6, but don't use map or filter. Instead, try to use the reduce method.
+
+
+9 Without using a for, while, or do/while loop, write some code that checks whether the number 3 appears inside these arrays:
+
+> let numbers1 = [1, 3, 5, 7, 9, 11];
+> let numbers2 = [];
+> let numbers3 = [2, 4, 6, 8];
+
+
+10 Write some code to replace the value 6 in the following array with 606:
+
+let arr = [
+  ["hello", "world"],
+  ["example", "mem", null, 6, 88],
+  [4, 8, 12]
+];
+
+
+https://launchschool.com/books/javascript/read/objects#whatareobjects
+Objects
+
+
+> let person = { name: 'Jane', age: 37, hobbies: ['photography', 'genealogy'] }
+
+
+Objects vs. Primitives
+
+You may remember that JavaScript has two categories of data types: primitives and objects. The primitive types are strings, numbers, booleans, null, and undefined, bigints, and symbols. Primitive types are the simplest, most basic types in JavaScript.
+
+Objects include, but aren't limited to, the following types:
+
+    Simple Objects
+    Arrays
+    Dates
+    Functions
+
+We learned about simple objects in the previous section; they're structures that contain multiple named values. Arrays are also objects, but they use integer indexes instead of keys. We learn about Date and Function objects in the Core Curriculum.
+
+
+https://launchschool.com/books/javascript/read/objects#prototypes
+Prototypes
+
+An interesting and handy feature of JavaScript objects is that they can inherit from other objects. When an object a inherits from object b, we say that b is the prototype of a. The practical implication is that a now has access to properties defined on b even though it doesn't define those properties itself.
+
+
+Object prototypes and inheritance have a great deal of relevance in Object Oriented Programming (OOP). We discuss these concepts here since it is relevant to our discussion of iterating over object properties in the next section. All you need to know right now is that inheritance lets one object use the properties defined by another object and that prototypes implement inheritance in JavaScript.
+
+
+https://launchschool.com/books/javascript/read/objects#iteration
+Iteration
+
+The for/in loop
+
+The for/in loop behaves similarly to an ordinary for loop. The syntax and semantics are easier to understand since you don't need an initializer, ending condition, or increment clause. Instead, the loop iterates over all the keys in the object. In each iteration, it assigns the key to a variable which you then use to access the object's values. As always, seeing a concept in action is helpful:
+
+One feature—or downside, depending on how you look at it—of for/in is that it iterates over the properties of an object's prototypes as well:
+
+let obj1 = { a: 1, b: 2 }
+let obj2 = Object.create(obj1);
+obj2.c = 3;
+obj2.d = 4;
+
+for (let prop in obj2) {
+  console.log(obj2[prop]);
+}         // => 3
+          //    4
+          //    1
+          //    2
+
+
+This behavior is undesirable when you want to limit iteration to an object's own properties, i.e., properties it defined for itself, not properties it inherited. We can use the hasOwnProperty method to get around that problem. It takes the name of a property and returns true if it is the name of one of the calling object's own properties, false if it is not.
+
+let obj1 = { a: 1, b: 2 }
+let obj2 = Object.create(obj1);
+obj2.c = 3;
+obj2.d = 4;
+
+for (let prop in obj2) {
+  if (obj2.hasOwnProperty(prop)) {
+    console.log(obj2[prop]);
+  }
+} // => 3
+  //    4
+
+
+Object.keys
+
+The Object.keys static method returns an object's keys as an array. You can iterate over that array using any technique that works for arrays. For instance:
+
+let person = {
+  name: 'Bob',
+  age: 30,
+  height: '6 ft'
+};
+
+let personKeys = Object.keys(person);
+console.log(personKeys);          // => ['name', 'age', 'height']
+personKeys.forEach(key => {
+  console.log(person[key])
+});                               // => Bob
+                                  //    30
+                                  //    6 ft
+
+Order of Object Properties
+
+Older versions of the ECMAScript standard (prior to ES6) don't guarantee the iteration order for an object's property keys. Many JavaScript engines took advantage of this non-guarantee. In older versions of JavaScript, you can't rely on any particular iteration order. Even in the same engine, you might get different results in separate runs of a program.
+
+Modern versions of the standard (ES6+) do guarantee the iteration order for an object's property keys. However, this order is somewhat complex. The order is based on:
+
+    the types of the property keys (strings come before symbols)
+    the values of the keys (non-negative integers come first), and
+    the order in which the keys were added to the object.
+
+It's tempting to rely on this predictable order, but the order isn't straightforward except in the simplest cases.
+
+https://launchschool.com/books/javascript/read/objects#commonoperations
+Common Operations
+
+// https://medium.com/@fknussel/arrays-objects-and-mutations-6b23348b54aa
+Unlike JavaScript arrays (which, you may remember, are objects), most JavaScript objects don't have an abundance of methods that you can apply in your day to day usage. Most operations on objects involve iterating over the properties or their values. More often than not, you'll reach for methods that extract the keys or values of an object and then iterate over the resulting array. We saw an example of that when we used Object.keys to extract an object's keys as an array and then iterated over the array.
+
+Object.entries
+
+While Object.keys and Object.values return the keys and values of an object, respectively, the Object.entries static method returns an array of nested arrays. Each nested array has two elements: one of the object's keys and its corresponding value:
+
+let person = { name: 'Bob', age: 30, height: '6ft' };
+console.log(Object.entries(person)); // => [[ 'name', 'Bob' ], [ 'age', 30 ], [ 'height', '6ft' ]]
+
+Object.assign
+
+You may sometimes want to merge two or more objects, i.e., combine the key-value pairs into a single object. The Object.assign static method provides this functionality:
+
+> let objA = { a: 'foo' }
+= undefined
+
+> let objB = { b: 'bar' }
+= undefined
+
+> Object.assign(objA, objB)
+= { a: 'foo', b: 'bar' }
+
+
+
+
+Note that objB isn't mutated. If you need to create a new object, use an empty object as Object.assign's first argument. Note that Object.assign can take more than two arguments:
+
+
+
+> objA = { a: 'foo' }
+= undefined
+
+> objB = { b: 'bar' }
+= undefined
+
+> Object.assign({}, objA, objB)
+= { a: 'foo', b: 'bar' }
+
+> objA
+= { a: 'foo' }
+
+> objB
+= { b: 'bar' }
+
+
+Objects vs. Arrays
+
+This chapter and the last discussed two fundamental data structures: objects and arrays. It can seem overwhelming when you look at all of the different ways to represent data with code. Don't feel daunted, however. You'll use objects and arrays often. The more you use them, the more you'll learn about them. It's impossible to learn everything in the beginning, so put some effort into learning the basics, then build from there.
+
+When you need to choose between an object or an array to store some data, ask yourself a few questions:
+
+    Do the individual values have names or labels? If yes, use an object. If the data doesn't have a natural label, an array should suffice.
+
+    Does order matter? If yes, use an array.
+
+    Do I need a stack or queue structure? Arrays are good at mimicking simple "last-in-first-out" stacks and "first-in-first-out" queues.
+
+As you grow as a developer, your familiarity with these data structures may affect which one you choose to solve a problem. Practice and experiment with each to find out which data structure works best in which situations.
+
+
+
+ Exercises
+
+1 Given the following code, how can you access the name of the person?
+
+
+
+
+
+
+
+
+
+
 
 */
