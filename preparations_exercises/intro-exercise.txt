@@ -1595,9 +1595,98 @@ let obj = {
 7 Add a qux property with value 3 to the myObj object we created in the previous exercise. Now, examine the following code snippets:
 
 
+https://launchschool.com/books/javascript/read/more_stuff
+More stuff
 
 
+What's crucial to understand at this point is that variables that have primitive values store those values at the memory location associated with the variable. In our example, a and b point to different memory locations. When we assign a value to either variable, the value gets stored in the appropriate memory location. If you later change one of those memory locations, it does not affect the other memory location, even if they started off with the same value. Therefore, the variables are independent when they contain primitive values.
+
+In reality, string values aren't stored in variables in the same way as most primitive values, but they act like they are. Don't worry about how they are stored -- just remember how they act.
+
+Working with Objects and Non-Mutating Operations
+
+let obj = { a: 1 };
+obj = { b: 2 };
+obj.c = 3;
+
+What does that look like in the computer? As we learned earlier, creating new variables causes JavaScript to allocate a spot somewhere in its memory for the value. However, with objects, JavaScript doesn't store the value of the object in the same place. Instead, it allocates additional memory for the object, and places a pointer to the object in the space allocated for the variable. Thus, we need to follow two pointers to get the value of our object from its variable name. The process looks like this:
+
+Nn this example, obj is always at address 0x1248. The value at that address is a pointer to the actual object. While the pointer to the object can change, obj itself always has the same address. In the above table, we can see that obj's address doesn't change, but its value changes to the address of the object currently assigned to the variable.
 
 
+Let's look at another example. This time, we'll use arrays. Remember that arrays in JavaScript are objects, and almost everything we say about arrays holds for objects as well.
+
+> let c = [1, 2]
+> let d = c
+> c = [3, 4]
+> c
+= [ 3, 4 ]
+
+> d
+= [ 1, 2 ]
+
+Again, this example holds no surprises. For the moment, though, let's ignore what happens on line 2. We can assume that variables c and d end up with the same value after line 2 runs. Reassigning c on line 3 creates a new array, but the code doesn't affect the value of d. The two variables reference different arrays.
+
+This code works as expected since reassignment changes the pointer value of c to reference the new [3, 4] object. Though d originally had the same pointer value as c, it was stored in a different memory location (the location of d). Thus, when we reassign c, we're not changing d -- it still points to the original array.
+
+As with primitive values, this is straightforward: each variable has a value, and reassigning values does not affect any other variables that happen to have the same value. Thus, c and d are independent variables.
+
+
+> let e = [1, 2]
+> let f = e
+> e.push(3, 4)
+> e
+= [ 1, 2, 3, 4 ]
+
+> f
+= [ 1, 2, 3, 4 ]
+
+
+Now, that's interesting and puzzling. We mutated the array referenced by e, but it also changed the array referenced by f! How can that happen? Therein lies the source of a lot of confusion for new programmers.
+
+As we saw a little earlier, objects (and arrays) aren't stored in the memory location used by the variable. Instead, that memory location points to yet another memory location. That's where the object is ultimately stored.
+
+The use of pointers has a curious effect when you assign a variable that references an object to another variable. Instead of copying the object, JavaScript only copies the pointer. Thus, when we initialize f with e, we're making both e and f point to the same array: [1, 2]. It's not just the same value, but the same array in the same location in memory. The two variables are independent, but since they point to the same array, that array is dependent on what you do to both e and f.
+
+Okay, that's good. What happens if we mutate a primitive value? Oops! You can't do that: all primitive values are immutable. Two variables can have the same primitive value. However, since primitive values are stored in the memory address allocated for the variable, they can never be aliases. If you give one variable a new primitive value, it doesn't affect the other.
+
+
+Gotcha
+
+If you've followed along so far, you may think that reassignment never mutates anything. As the following code demonstrates, however, that isn't always true:
+
+> let g = ['a', 'b', 'c']
+> let h = g
+> g[1] = 'x'
+> g
+= [ 'a', 'x', 'c' ]
+
+> h
+= [ 'a', 'x', 'c' ]
+
+
+for/in and for/of
+
+Two useful variants for the for loop are the for/in and for/of loops. These loops use a variant syntax to loop easily over object properties.
+
+The for/in statement iterates over all enumerable properties of an object including any properties inherited from another object. For now, you don't need to know anything about inheritance or enumerable properties -- for/in will usually do what you want.
+
+
+let obj = { foo: 1, bar: 2, qux: 'c' };
+for (let key in obj) {
+  console.log(key);
+}
+
+let obj = { foo: 1, bar: 2, qux: 'c' };
+for (let index in obj) {
+  console.log(obj[index]);
+}
+
+for/of is similar to for/in, but it iterates over the values of any "iterable" collection. For our purposes, the only iterable collections are arrays and strings. Let's see what happens when we pass a string to for/of:
+
+let arr = [ 10, 20, 30 ]
+for (let value of arr) {
+  console.log(value);
+}
 
 */
