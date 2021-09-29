@@ -1689,4 +1689,290 @@ for (let value of arr) {
   console.log(value);
 }
 
+
+
+https://launchschool.com/books/javascript/read/more_stuff#methodchaining
+Method chaining
+
+
+let str = 'Pete Hanson';
+let names = str.toUpperCase().split(' ').reverse().join(', ');
+console.log(names); // => HANSON, PETE
+
+
+On line 2, we have a long chain of method calls. First, we call toUpperCase() on the string str, which returns 'PETE HANSON'. Then we call split(' ') on the returned string, which in turn returns the array ['PETE', 'HANSON']. We then use the array to invoke reverse(), which returns a new array, ['HANSON', 'PETE']. In the last step, we join the elements of the array together with a comma and space between elements, which returns the string 'HANSON, PETE'.
+
+
+
+https://launchschool.com/books/javascript/read/more_stuff#regex
+Regex
+
+A regular expression—a regex—is a sequence of characters that you can use to test whether a string matches a given pattern. They have a multitude of uses:
+
+    Check whether the string "Mississippi" contains the substring ss.
+    Print the 3rd word of each sentence from a list of sentences.
+    Replace all instances of Mrs in some text with Ms.
+    Does a string begin with the substring St?
+    Does a string end with the substring art?
+    Does a string contain any non-alphanumeric characters?
+    Does a string contain any whitespace characters?
+    Replace all non-alphanumeric characters in a string with a hyphen (-).
+
+That's a tiny sample of the kinds of operations you can perform with regex.
+
+function has_a_or_e(string) {
+  let results = string.match(/[ae]/g);
+  if (results) {
+    // a non-null return value from match is truthy
+    console.log(`We have a match! ${results}`);
+  } else {
+    // a null return value from match is falsy
+    console.log('No match here.');
+  }
+}
+
+has_a_or_e("basketball"); // => We have a match! a,e,a
+has_a_or_e("football");   // => We have a match! a
+has_a_or_e("hockey");     // => We have a match! e
+has_a_or_e("golf");       // => No match here.
+
+Since match must generate information above and beyond a simple boolean value, it can have performance and memory costs. test is more efficient, so try to use it when you don't need to know anything other than whether the regex matched the string.
+
+
+https://launchschool.com/books/javascript/read/more_stuff#themathobject
+Most programs need to perform some arithmetic or mathematical operations. That doesn't mean you need much math as a programmer; most programs need little more than some basic arithmetic like a + 1.
+
+However, sometimes you need a bit more: you may need to calculate the square root of a number, determine the smallest number in a collection, or even do some trigonometric calculations. You can use well-known algorithms to make these computations, but you don't have to. The JavaScript Math object provides a collection of methods and values that you can use without a complete understanding of how they work.
+
+
+
+https://launchschool.com/books/javascript/read/more_stuff#dates
+Dates
+
+Suppose you want to determine the day of the week that December 25 occurred on in 2012. How would you go about that? You may be able to come up with an appropriate algorithm on your own, but working with dates and times is a messy process. It's often much harder than you think.
+
+You don't have to work that hard, however. JavaScript's Date constructor creates objects that represent a time and date. The objects provide methods that let you work with those values. In particular, it's not hard to determine the day of the week that corresponds to a date:
+
+
+Getting a day name takes a bit more work, but it's not difficult:
+function getDayOfWeek(date) {
+  let daysOfWeek = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
+  return daysOfWeek[date.getDay()];
+}
+
+let date = new Date('December 25, 2012');
+console.log(getDayOfWeek(date)); // => Tuesday
+
+
+https://launchschool.com/books/javascript/read/more_stuff#exceptions
+exceptions
+
+
+Applications that interact with the real world encounter a significant degree of unpredictability. If a user enters incorrect information or a file gets corrupted, your program must know how to respond. If it doesn't, it may crash or, worse yet, produce incorrect results.
+
+JavaScript is a forgiving language. It doesn't issue error messages in scenarios that most other languages do. Instead, it "fails silently" by returning a value like NaN, undefined, null, or even -1.
+
+Silent failures are both useful and dangerous. A programmer can take advantage of silent errors to simplify some code; often, you don't have to deal with the silent error right away, but can postpone handling it or even ignore it entirely. Ultimately, though, you need to deal with errors somehow, even silent errors.
+
+Not all errors in JavaScript are silent. There are some situations where JavaScript is less forgiving; that's where exceptions come into play. In such cases, JavaScript raises an error, or throws an exception, then halts the program if the program does not catch the exception.
+
+Exception handling is a process that deals with errors in a manageable and predictable manner. For now, you should be familiar with how exception handling works and what it looks like in a program. The reserved words try and catch (and sometimes finally) often occur in real-world JavaScript programs, so you should learn enough to understand what they do.
+
+let names = ['bob', 'joe', 'steve', undefined, 'frank'];
+
+names.forEach(name => {
+  try {
+    console.log(`${name}'s name has ${name.length} letters in it.`);
+  } catch (exception) {
+    console.log('Something went wrong');
+  }
+});
+
+
+SyntaxError
+
+A special kind of exception occurs if the code can't be handled as valid JavaScript. Such errors cause JavaScript to raise a SyntaxError. A SyntaxError is special in that it occurs immediately after loading a JavaScript program, but before it begins to run. Unlike a TypeError exception that is dependent upon runtime conditions, JavaScript detects syntax errors based solely on the text of your program. Since they are detected before execution begins, you can't use a try/catch statement to catch one.
+
+
+
+
+https://launchschool.com/books/javascript/read/more_stuff#readingstacktraces
+Stack trace 
+
+
+https://launchschool.com/books/javascript/read/more_stuff#essixandbeyond
+ES6
+
+Most professionals call the language we've been learning JavaScript, but the official name is ECMAScript. The JavaScript name exists for historical reasons.
+
+The language has seen numerous revisions and experienced a host of changes since its initial version. ECMAScript 6, or ES6 as it's commonly known, is a recent version of the language specification that added a variety of modern features. You may also encounter the name ES2015.
+
+The let and const keywords we've used in this book are part of ES6. Before ES6, JavaScript didn't have block scopes. All JavaScript variables were either locally scoped to a function or globally scoped to the program. These keywords solve an entire class of problems having to do with scope and how JavaScript translates code into something it can run.
+
+Another ES6 feature that we learned about in this book is arrow functions. Among other benefits, they solve a problem called lost execution context, or, more plainly, context loss.
+
+
+Exercises
+
+1 What does this code log to the console? Why?
+
+let array1 = [1, 2, 3];
+let array2 = array1;
+array1[1] = 4;
+console.log(array2);
+
+// array1 gets get assigned to memory, the array itself has values that are primitive values. These values are immutable. The variable and the array shares the same memory address. Following this, array2 gets assigned to array 1. Bot now point the the same memory address and share the same array with values 1,2,3. In the following line the code executes an array value mutation. At index 1 in the array 2 gets replaced with 4. This action permanently mutates the array. As both variable, array1 and array2 points to the same address in memory, the return will be the same mutated array[1,4,3]. This action indicates that references or pointers are assigned to each variable
+
+
+2 What do the following error message and stack trace tell you?
+
+$ node exercise2.js
+/Users/wolfy/tmp/exercise2.js:4
+  console.log(greeting);
+              ^
+
+ReferenceError: greeting is not defined
+    at hello (/Users/wolfy/tmp/exercise2.js:4:15)
+    at Object.<anonymous> (/Users/wolfy/tmp/exercise2.js:13:1)
+    at Module._compile (internal/modules/cjs/loader.js:721:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:732:10)
+    at Module.load (internal/modules/cjs/loader.js:620:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:560:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:552:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:774:12)
+    at executeUserCode (internal/bootstrap/node.js:342:17)
+    at startExecution (internal/bootstrap/node.js:276:5)
+
+// the stack trace tells us that exercise2.js on line 4 has an error. The error called is a Reference error, that states that greeting is not defined. It further indicates the error starts at ine 4 on column 15. The next line indicates that then anonymous callback, encountered a error on line 13 at column 1, which originates higher in the stack to the above issue of not defined at the global program level.  the rest of the lines is additional code compiled by node.
+
+3 Write some code to output the square root of 37.
+
+Math.sqrt(37)
+= 6.082762530298219
+
+4 Given a list of numbers, write some code to find and display the largest numeric value in the list.
+List 	           Max
+|1, 6, 3, 2 	    | 6
+|-1, -6, -3, -2 	|-1
+|2, 2 	          |2
+
+console.log(Math.max(1,6,3,2));
+console.log(Math.max(-1,-6,-3,-2));
+console.log(Math.max(2,2));
+
+const array1 = [1, 6, 3, 2 ];
+console.log(Math.max(...array1));
+const array2 = [-1,-6,-3,-2];
+console.log(Math.max(...array2));
+const array3 = [2,2];
+console.log(Math.max(...array3));
+// However, both spread (...) and apply will either fail or return the wrong result if the array has too many elements, because they try to pass the array elements as function parameters. See Using apply and built-in functions for more details. The reduce solution does not have this problem. 
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply#using_apply_and_built-in_functions
+But beware: by using apply this way, you run the risk of exceeding the JavaScript engine's argument length limit. The consequences of applying a function with too many arguments (that is, more than tens of thousands of arguments) varies across engines. (The JavaScriptCore engine has hard-coded argument limit of 65536.
+
+
+var arr = [1,6,3,2];
+var max = arr.reduce(function(a, b) {
+    return Math.max(a, b);
+}, 0);
+
+max; // 6
+
+
+5 What does the following function do?
+
+function doSomething(string) {
+  return string.split(' ').reverse().map((value) => value.length);
+}
+
+// This code converts a string into an array of words, reverses that array, and then returns a new array that contains the lengths of the words. It assumes that a single space character delimits the words in the original string.
+
+Thus:
+
+console.log(doSomething("Pursuit of happiness")); // => [ 9, 2, 7 ]
+
+6 Write a function that searches an array of strings for every element that matches the regular expression given by its argument. The function should return all matching elements in an array.
+
+Example
+
+let words = [
+  'laboratory',
+  'experiment',
+  'flab',
+  'Pans Labyrinth',
+  'elaborate',
+  'polar bear',
+];
+
+let allMatches = /(\w+|)(lab)(\w+|)/g;
+
+console.log(allMatches(words, /lab/)); // => ['laboratory', 'flab', 'elaborate']
+
+7 What is exception handling and what problem does it solve?
+
+// It allows a user to catch errors in as section or block of code. The advantage mainly is to catch any errors and then continue to run the rest of the code block or section. Exception handling allows a coe to continue after an error occurred, which is'nt detrimental to the rest of the program.
+
+
+8 Earlier, we learned that Number.isNaN(value) returns true if value is the NaN value, false otherwise. You can also use Object.is(value, NaN) to make the same determination.
+
+Without using either of those methods, write a function named isNotANumber that returns true if the value passed to it as an argument is NaN, false if it is not.
+
+function isNotANumber(value) {
+  return value !== value;
+}
+
+9 Earlier, we learned that JavaScript has multiple versions of the numeric value zero. In particular, it has 0 and -0. These numbers, while being mathematically nonsensical, are distinct values in JavaScript. We won't get into why JavaScript has a 0 and -0, but it can be useful in some cases.
+
+> 0 === -0
+= true
+
+> String(-0)
+= '0'
+
+> let value = -0;
+> Object.is(value, 0)
+= false
+
+> Object.is(value, -0)
+= true
+
+
+function isNegativeZero(value) {
+  return 1 / value === -Infinity;
+}
+
+
+10 Consider this code:
+
+> let x = "5"
+> x = x + 1
+= "51"
+
+Now, consider this code:
+
+> let y = "5"
+> y++
+
+What gets returned by y++ in the second snippet, and why?
+
+// 5 as a number, because the ++ decrement operator is used, the value is coerced to a number, but not added to to 6. The value returned is 5 the coerced value that takes precedence.
+
+
+The return value is the numeric value 5.
+
+If you apply ++ to a string, JavaScript coerces it into a number. In this case, "5" gets coerced to the number 5. After coercion, it then increments the value to 6. However, the return value is 5 since the post-increment operator (y++) returns the original value of y, not the incremented value.
+
+This shows that x++ is not the same thing as x = x + 1.
+
+
 */
